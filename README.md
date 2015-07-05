@@ -11,7 +11,11 @@ Some goals:
       - i.e. - number-of-contexts = number-of-screens * number-of-desktops
 - create a functionality layer with above that allows arbitrary scripting as needed
 
-## Ported from Hydra
+## Uses Hammerspoon
+- https://github.com/Hammerspoon/hammerspoon
+  - very useful stuff there and responsive group
+- ported from Hydra (previous implementation of project that Hammerspoon forked)
+
 
 ## Spaces
 - Spaces support is ridiculous in Mac at this point
