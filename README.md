@@ -11,4 +11,14 @@ Some goals:
       - i.e. - number-of-contexts = number-of-screens * number-of-desktops
 - create a functionality layer with above that allows arbitrary scripting as needed
 
-# Ported from Hydra
+## Ported from Hydra
+
+## Spaces
+- Spaces support is ridiculous in Mac at this point
+- This work depends on internal apis that are deprecated
+  - implemented in asmagill's port from sdegutis mjolnir/hydra work
+  - unsure if they are compatible with Yosemite
+  - only need an indicator of which desktop (space) is current
+    - so possible to find future internal apis if Apple doesn't make it public
+- If this were not the case I would probably push to disseminate as the functionality is damned handy
+
