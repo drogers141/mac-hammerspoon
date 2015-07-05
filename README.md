@@ -21,6 +21,7 @@ Some goals:
 - Spaces support is ridiculous in Mac at this point
 - This work depends on internal apis that are deprecated
   - implemented in asmagill's port from sdegutis mjolnir/hydra work
+    - https://github.com/asmagill/hammerspoon_asm.undocumented
   - unsure if they are compatible with Yosemite
   - only need an indicator of which desktop (space) is current
     - so possible to find future internal apis if Apple doesn't make it public
