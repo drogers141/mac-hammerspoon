@@ -176,6 +176,16 @@ util.screentable = function(s)
   return {frame=s:frame(), fullFrame=s:fullFrame()}
 end
 
+-- get a window from current ordered standard windows by id
+-- id - number
+util.windowbyid = function(id)
+  for i, w in pairs(util.orderedwindows()) do
+    if w:id() == id then
+      return w
+    end
+  end
+end
+
 -- identify screen based on resolution
 -- arbitrarily deciding on id here
 -- so need to add any new screens
