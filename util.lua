@@ -196,11 +196,11 @@ util.screens = {
   s2= {h = 1200, w = 1920, x = 0, y = 0}
 }
 
--- rect - rect obtained from screen:frame()
+-- rect - hs.geometry.rect
 -- returns a screen_id string if found, or nil
 util.get_screen_id = function(rect)
   for i, r in pairs(util.screens) do
-    if util.equals(rect,r) then
+    if rect:equals(r) then
       return i
     end
   end

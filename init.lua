@@ -122,7 +122,7 @@ function tile_window_to(win, otherwin, fill)
   win:setFrame(newf)
 end
 
--- same logic as tiling one window to the other, but don't resize the window 
+-- same logic as tiling one window to the other, but don't resize the window
 -- to butt the opposite side to the edge of the screen
 -- as with tiling - not implementing vertical butting yet
 function butt_window_to(win, otherwin)
@@ -383,41 +383,25 @@ winkey:bind({}, "t", tile_first_to_second_ordered_window)
 winkey:bind({}, "b", butt_first_to_second_ordered_window)
 winkey:bind({}, "c", copy_window_geo_first_to_second_ordered_window)
 
---winkey:bind({}, "n", focused_win_geo_hist_next)
---winkey:bind({}, "p", focused_win_geo_hist_previous)
+winkey:bind({}, "n", focused_win_geo_hist_next)
+winkey:bind({}, "p", focused_win_geo_hist_previous)
 
 winkey:bind({}, "escape", function() winkey:exit() end)
 
 function winkey:entered()
---  local qname = assert(visicon.get_current_vc_queue_name())
---  if not fnutils.contains(visicon.vcs_to_ignore, qname) then
---    notify.show("Mode Activated", "",
---              "Focused window operations.", "")
---  end
   hs.notify.show("Mode Activated", "",
               "Focused window operations.", "")
 end
 
 -- deal with any cleanup
 function winkey:exited()
---  -- clear geometry history for focused window if being traversed
---  -- note that depending on usage, might want to make this smarter
---  -- and have the closure function confirm the app of the focused window
---  -- and reset there if it changes - this might facilitate operating on multiple
---  -- windows in a single session
---  clear_geo_hist()
---  -- note that I am now guarding the notification calls with
---  -- a check to see if the current visicon is being ignored
---  -- which duplicates logic in visicon.add_current_vc_state
---  -- for now I am fine with it, as this is just a convenience
---  -- and the logic in add_current_vc_state wants to be there
---  -- no matter how it is invoked
---  visicon.add_current_vc_state()
---  local qname = assert(visicon.get_current_vc_queue_name())
---  if not fnutils.contains(visicon.vcs_to_ignore, qname) then
---    notify.show("Mode Deactivated", "",
---              "Leaving window operations mode - saved vc state", "")
---  end
+  -- clear geometry history for focused window if being traversed
+  -- note that depending on usage, might want to make this smarter
+  -- and have the closure function confirm the app of the focused window
+  -- and reset there if it changes - this might facilitate operating on multiple
+  -- windows in a single session
+  clear_geo_hist()
+  visicon.add_current_vc_state()
   hs.notify.show("Mode Deactivated", "",
               "Leaving window operations mode", "")
 end
