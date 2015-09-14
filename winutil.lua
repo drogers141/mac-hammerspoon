@@ -9,6 +9,9 @@ win = {}
 ----------------------------------------------------------------------
 -- Rectangle operations - all take and return rectangles (no mutation)
 -- ie - same as hydra's frames {x, y, w, h}
+-- UPDATE - ported to Hammerspoon - can now access x, y, w, h
+-- but can't rely on them internally - see hs.geometry
+-- so my rects are really hs.geometry.rect instances now
 ----------------------------------------------------------------------
 
 -- move a rect by adding an {x, y} vector to it
