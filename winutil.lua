@@ -52,15 +52,15 @@ win.throw_rect = function(r, outside_r, direction)
   local outside_bottom = outside_r.y + outside_r.h
   assert(outside_right > 0 and outside_bottom > 0)
 
-  ret = nil
+  ret = hs.geometry(r)
   if direction == "left" then
-    ret = util.merge(r, {x = outside_r.x})
+    ret.x = outside_r.x
   elseif direction == "right" then
-    ret = util.merge(r, {x = outside_right-r.w})
+    ret.x = outside_right-r.w
   elseif direction == "up" then
-    ret = util.merge(r, {y = outside_r.y})
+    ret.y = outside_r.y
   elseif direction == "down" then
-    ret = util.merge(r, {y = outside_bottom-r.h})
+    ret.y = outside_bottom-r.h
   else
     assert(false, "bad direction: " .. direction)
   end
@@ -88,17 +88,17 @@ function win.expand_fill_rect(r, outside_r, direction)
   local r_bottom = r.y + r.h
   assert(outside_right > 0 and outside_bottom > 0)
 
-  ret = nil
+  ret = hs.geometry(r)
   if direction == "left" then
-    ret = util.merge(r, {x = outside_r.x,
-                          w = r_right - outside_r.x})
+    ret.x = outside_r.x
+    ret.w = r_right - outside_r.x
   elseif direction == "right" then
-    ret = util.merge(r, {w = outside_right - r.x})
+    ret.w = outside_right - r.x
   elseif direction == "up" then
-    ret = util.merge(r, {y = outside_r.y,
-                          h = r_bottom - outside_r.y})
+    ret.y = outside_r.y
+    ret.h = r_bottom - outside_r.y
   elseif direction == "down" then
-      ret = util.merge(r, {h = outside_bottom - r.y})
+    ret.h = outside_bottom - r.y
   else
     assert(false, "bad direction: " .. direction)
   end
