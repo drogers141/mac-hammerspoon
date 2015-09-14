@@ -63,25 +63,25 @@ local screen_r = {x=0, y=22, w=1920, h=1095}
 local win_r = {x=200, y=100, w=600, h=400}
 
 assert(util.equals(winutil.throw_rect(win_r, screen_r, "left"),
-                  {x=0, y=100, w=600, h=400}))
+                  hs.geometry({x=0, y=100, w=600, h=400})))
 assert(util.equals(winutil.throw_rect(win_r, screen_r, "right"),
-                  {x=1320, y=100, w=600, h=400}))
+                  hs.geometry({x=1320, y=100, w=600, h=400})))
 assert(util.equals(winutil.throw_rect(win_r, screen_r, "up"),
-                  {x=200, y=22, w=600, h=400}))
+                  hs.geometry({x=200, y=22, w=600, h=400})))
 assert(util.equals(winutil.throw_rect(win_r, screen_r, "down"),
-                  {x=200, y=717, w=600, h=400}))
+                  hs.geometry({x=200, y=717, w=600, h=400})))
 
 print("testing win expand_fill_rect")
 local screen_r = {x=0, y=22, w=1920, h=1095}
 local win_r = {x=200, y=100, w=600, h=400}
 
 assert(util.equals(winutil.expand_fill_rect(win_r, screen_r, "left"),
-                  {x=0, y=100, w=800, h=400}))
+                  hs.geometry({x=0, y=100, w=800, h=400})))
 assert(util.equals(winutil.expand_fill_rect(win_r, screen_r, "right"),
-                  {x=200, y=100, w=1720, h=400}))
+                  hs.geometry({x=200, y=100, w=1720, h=400})))
 assert(util.equals(winutil.expand_fill_rect(win_r, screen_r, "up"),
-                  {x=200, y=22, w=600, h=478}))
+                  hs.geometry({x=200, y=22, w=600, h=478})))
 assert(util.equals(winutil.expand_fill_rect(win_r, screen_r, "down"),
-                  {x=200, y=100, w=600, h=1017}))
+                  hs.geometry({x=200, y=100, w=600, h=1017})))
 
 print("ok")
