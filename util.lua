@@ -163,17 +163,25 @@ util.orderedwindows = function()
                             function(w) return w:isStandard() end)
 end
 
+-- get the frame rect from a window or a screen object as a table that can be
+-- serialized and recreate a rect - ie dogfooded
+util.get_frame_rect = function(o)
+  return {x=o:frame().x, y=o:frame().y,
+          w=o:frame().w, h=o:frame().h}
+end
+
+
 -- table for a window userdata object
 --    id, application title, frame, window title
 util.windowtable = function(w)
   return {id=w:id(), apptitle=w:application():title(),
-            frame=w:frame(), title=w:title()}
+            frame=util.get_frame_rect(w), title=w:title()}
 end
 
 -- table for a screen userdata object - frame,
 --    frames with and without dock and menu
 util.screentable = function(s)
-  return {frame=s:frame(), fullFrame=s:fullFrame()}
+  return {frame=util.get_frame_rect(s), fullFrame=s:fullFrame()}
 end
 
 -- get a window from current ordered standard windows by id
@@ -193,7 +201,9 @@ util.screens = {
   -- laptop
   s1 = {h = 900, w = 1440, x = 0, y = 0},
   -- Dell 26 inch
-  s2= {h = 1200, w = 1920, x = 0, y = 0}
+  s2= {h = 1200, w = 1920, x = 0, y = 0},
+  -- work - Nixeus 27 inch
+  s3 = {h = 1440, w = 2560, x = 0, y = 0}
 }
 
 -- rect - hs.geometry.rect
