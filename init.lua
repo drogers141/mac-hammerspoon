@@ -66,7 +66,7 @@ function movewindow_righthalf()
   local win = hs.window.focusedWindow()
   local newframe = win:screen():frame()
   newframe.w = newframe.w / 2
-  newframe.x = newframe.x + newframe.w -- comment out this line to push it to left half of screen
+  newframe.x = newframe.x + newframe.w
   win:setFrame(newframe)
 end
 
@@ -83,11 +83,7 @@ end
 --  end)
 --end
 
--- beginning to think about tiling
--- here we take a window and another window
--- we want to tile our window to the other window
--- in whatever direction makes sense - without having to
--- pass in direction, to minimize calls
+-- tile window to another in whatever direction makes sense
 -- fill - optional - if truthy after tiling the window
 --    to the other window in one direction, fill the screen
 --    in the orthogonal direction
@@ -344,6 +340,7 @@ end
 --    P         Change geometry to previous (ie forward in history)
 --    escape    Exit Mode
 
+
 --local volkey = hotkey.modal.new({"ctrl", "alt"}, "v")
 --volkey:bind({}, "up", util.volume_up)
 --volkey:bind({}, "down", util.volume_down)
@@ -405,3 +402,4 @@ function winkey:exited()
   hs.notify.show("Mode Deactivated", "",
               "Leaving window operations mode", "")
 end
+

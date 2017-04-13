@@ -98,12 +98,15 @@ end
 -------------------------------------------------------------------------------
 
 -- log a string to the os x system logger
+-- UPDATE: for macOS Sierra
+-- new unified logging system breaks syslog, but can see output with new "log" command
+-- e.g. "log --stream --type log" approximates tailing syslog
 -- params
 -- s - string to log
--- t - optional tag - defaults to "dr-hydra" until new name
+-- t - optional tag - defaults to "dr-hammerspoon"
 util.syslog = function(s, t)
   local tag = t or "dr-hammerspoon"
-  os.execute("/usr/bin/logger -t " .. tag .. " " .. "'" .. s .. "'")
+  os.execute("/usr/bin/logger ".."'["..tag.."] "..s.."'")
 end
 
 -- log string s to file f in append mode
@@ -269,3 +272,4 @@ end
 
 
 return util
+

@@ -3,12 +3,34 @@
 -- Add docs
 
 local util = dofile(package.searchpath("util", package.path))
+--local spaces = dofile(package.searchpath("spaces", package.path))
+
 
 -- **** SPACES FUNCTIONALITY - INTERNAL/EPHEMERAL ***
 local spaces = require("hs._asm.undocumented.spaces")
 
 visicon = {}
 
+-- for each visibility context there is a queue
+-- e.g. 2 screens and 4 desktops -> 8 vcqs
+-- screens are identified by resolution
+-- each queue will be kept in memory, between a min and max
+-- size - the queues hold visicon states as elements
+-- relies on ability to always easily determine what desktop
+-- is current as well - this seems not to be a problem
+-- the queues are just lua tables maintained as arrays
+-- with the most recent visicon state at the end of the array
+-- ie vsq[#vsq]
+-- the queue allows random access for resurrecting a former state
+-- which will reposition any windows with the same ids as the previous
+-- state had - and have some policy for new windows created after
+-- once there is a new state, that is added to the end of the list
+-- resizing - when q is longer than max length elements are removed
+-- from the front of the q
+local vc_queues = {}
+MAX_Q_LEN = 50
+
+-- state persisted in json
 visicon.snapshot_dir = '/Users/drogers/.hammerspoon/snapshots'
 
 
@@ -36,25 +58,6 @@ function visicon.state()
   end
   return state
 end
-
--- for each visibility context there is a queue
--- 2 screens and 4 desktops -> 8 vcqs
--- screens are identified by resolution
--- each queue will be kept in memory, between a min and max
--- size - the queues hold visicon states as elements
--- relies on ability to always easily determine what desktop
--- is current as well - this seems not to be a problem
--- the queues are just lua tables maintained as arrays
--- with the most recent visicon state at the end of the array
--- ie vsq[#vsq]
--- the queue allows random access for resurrecting a former state
--- which will reposition any windows with the same ids as the previous
--- state had - and have some policy for new windows created after
--- once there is a new state, that is added to the end of the list
--- resizing - when q is longer than max length elements are removed
--- from the front of the q
-local vc_queues = {}
-MAX_Q_LEN = 50
 
 -- modifies queue by removing front elements until it is of length <= maxlen
 -- does no error checking
@@ -203,6 +206,7 @@ function visicon.add_current_vc_state()
   local qname = assert(visicon.get_current_vc_queue_name())
   local q = visicon.get_current_vc_queue()
   if q then
+    print("vc_q = "..q)
     q[#q+1] = state
     visicon.trim_queue(q, MAX_Q_LEN)
   else
@@ -299,3 +303,4 @@ end
 
 
 return visicon
+
