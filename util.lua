@@ -97,16 +97,22 @@ end
 -- logging, directory stuff, audio, etc
 -------------------------------------------------------------------------------
 
--- log a string to the os x system logger
 -- UPDATE: for macOS Sierra
--- new unified logging system breaks syslog, but can see output with new "log" command
--- e.g. "log --stream --type log" approximates tailing syslog
+-- new unified logging system breaks syslog
+-- rather than play with the new system for my stuff will replicate
+-- system logging in ~/log
+util.logfile = "/Users/drogers/log/hammerspoon.log"
+
+-- log a string to util.logfile
 -- params
 -- s - string to log
--- t - optional tag - defaults to "dr-hammerspoon"
+-- t - optional tag - defaults to "[dr-hammerspoon]"
 util.syslog = function(s, t)
-  local tag = t or "dr-hammerspoon"
-  os.execute("/usr/bin/logger ".."'["..tag.."] "..s.."'")
+  local tag = t or "[dr-hammerspoon]"
+  local out = assert(io.open(util.logfile,'a'))
+  local timestamp = os.date('%Y-%m-%d %H:%M:%S')
+  out:write(timestamp.." "..tag.." "..s.."\n")
+  out:close()
 end
 
 -- log string s to file f in append mode
