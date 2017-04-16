@@ -190,7 +190,7 @@ end
 -- table for a screen userdata object - frame,
 --    frames with and without dock and menu
 util.screentable = function(s)
-  return {frame=util.get_frame_rect(s), fullFrame=s:fullFrame()}
+  return {frame=util.get_frame_rect(s), fullFrame=s:fullFrame().table}
 end
 
 -- get a window from current ordered standard windows by id

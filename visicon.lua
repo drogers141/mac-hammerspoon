@@ -206,7 +206,6 @@ function visicon.add_current_vc_state()
   local qname = assert(visicon.get_current_vc_queue_name())
   local q = visicon.get_current_vc_queue()
   if q then
-    print("vc_q = "..q)
     q[#q+1] = state
     visicon.trim_queue(q, MAX_Q_LEN)
   else
