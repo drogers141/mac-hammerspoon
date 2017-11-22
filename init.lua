@@ -56,7 +56,6 @@ function win_and_screen()
   print(hs.inspect(sff))
 end
 
-
 -----------------------
 -- Window Operations
 -----------------------
@@ -385,9 +384,16 @@ winkey:bind({}, "p", focused_win_geo_hist_previous)
 
 winkey:bind({}, "escape", function() winkey:exit() end)
 
+
+-- show "W" on menubar if in modal windows mode
+win_mode_status = hs.menubar.new()
+
 function winkey:entered()
-  hs.notify.show("Mode Activated", "",
-              "Focused window operations.", "")
+  if win_mode_status then
+    win_mode_status:setTitle("W")
+  end
+--  hs.notify.show("Mode Activated", "",
+--              "Focused window operations.", "")
 end
 
 -- deal with any cleanup
@@ -399,7 +405,11 @@ function winkey:exited()
   -- windows in a single session
   clear_geo_hist()
   visicon.add_current_vc_state()
-  hs.notify.show("Mode Deactivated", "",
-              "Leaving window operations mode", "")
+  if win_mode_status then
+    win_mode_status:setTitle(nil)
+  end
+
+--  hs.notify.show("Mode Deactivated", "",
+--              "Leaving window operations mode", "")
 end
 
