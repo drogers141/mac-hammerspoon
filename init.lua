@@ -251,7 +251,7 @@ function order_wins_info_alert()
   hs.alert(order_wins_info_str(), 10)
 end
 
--- print visible context state to hydra log
+-- debug
 function log_visicon_state()
 --  util.log(hs.inspect(visicon.state()) .. "\n")
   hs.inspect(visicon.state())
@@ -267,6 +267,21 @@ function alert_bindings()
   hs.alert(bindings_string(), 5)
 end
 
+-- store and restore visicon state with notifications
+function store_to_json()
+    visicon.global_snapshot()
+    hs.notify.new({title="Hammerspoon",
+        informativeText="Stored visicon queues to json"}
+        ):send():release()
+end
+function restore_from_json()
+    visicon.restore_queues_from_snapshot()
+    hs.notify.new({title="Hammerspoon",
+        informativeText="Restored visicon queues from json"}
+        ):send():release()
+end
+
+
 -- KEY BINDINGS
 -- note - these are parsed by an external program so keep same format
 --    in particular - keep 'bindings = {' and final '}' on their own lines
@@ -278,12 +293,10 @@ bindings = {
 --{mods={"cmd", "ctrl", "alt"}, key="I", func=visicon.ignore_current_vc, text="Ignore current vc - stop saving state changes automatically."},
 --{mods={"cmd", "ctrl", "alt"}, key="U", func=visicon.unignore_current_vc, text="Unignore current vc - resume normal automatic saving of state changes"},
 
--- see ~/.hydra/init.lua for commented out old bindings
-
 {mods={"ctrl", "alt"}, key="S", func=visicon.add_current_vc_state, text="Save visicon state to vc queue"},
 {mods={"ctrl", "alt"}, key="L", func=visicon.restore_to_last_state, text="Restore visicon to last saved state in vc queue"},
-{mods={"ctrl", "alt"}, key="G", func=visicon.global_snapshot, text="Save a global json snapshot of all vc queues"},
-{mods={"ctrl", "alt"}, key="R", func=visicon.restore_queues_from_snapshot, text="Restore global vc queues structure from last json snapshot"},
+{mods={"ctrl", "alt"}, key="G", func=store_to_json, text="Save a global json snapshot of all vc queues"},
+{mods={"ctrl", "alt"}, key="R", func=restore_from_json, text="Restore global vc queues structure from last json snapshot"},
 {mods={"ctrl", "alt"}, key="Q", func=alert_queue_status, text="Show global queue status in alert dialog"},
 }
 
