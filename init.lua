@@ -76,6 +76,12 @@ function movewindow_lefthalf()
   win:setFrame(newframe)
 end
 
+-- make window take up all of visible screen - not fullscreen mode
+function make_window_fullsize()
+  local win = hs.window.focusedWindow()
+  local newframe = win:screen():frame()
+  win:setFrame(newframe)
+end
 --function win_by_app_name(name)
 --  return fnutils.find(util.orderedwindows(), function(w)
 --    return w:application():title()
@@ -288,6 +294,7 @@ end
 bindings = {
 {mods={"cmd", "ctrl", "alt"}, key="R", func=movewindow_righthalf, text="Move window to right half"},
 {mods={"cmd", "ctrl", "alt"}, key="L", func=movewindow_lefthalf, text="Move window to left half"},
+{mods={"cmd", "ctrl", "alt"}, key="F", func=make_window_fullsize, text="Make window full size"},
 {mods={"cmd", "ctrl", "alt"}, key="K", func=alert_bindings, text="Show key bindings"},
 --{mods={"cmd", "ctrl", "alt"}, key="W", func=order_wins_info_alert, text="Show window info for context"},
 --{mods={"cmd", "ctrl", "alt"}, key="I", func=visicon.ignore_current_vc, text="Ignore current vc - stop saving state changes automatically."},
