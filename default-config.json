@@ -1,0 +1,8 @@
+{
+    "comment": "example config. namespace config by module. file is ./config.json",
+    "util": 
+        {"logfile": "/Users/drogers/log/hammerspoon.log"},
+    "visicon":
+        {"snapshot_dir": "/Users/drogers/.hammerspoon/snapshots"}
+}
+

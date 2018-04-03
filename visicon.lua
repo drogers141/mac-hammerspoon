@@ -31,7 +31,7 @@ local vc_queues = {}
 MAX_Q_LEN = 50
 
 -- state persisted in json
-visicon.snapshot_dir = '/Users/drogers/.hammerspoon/snapshots'
+visicon.snapshot_dir = util.get_config('visicon', 'snapshot_dir')
 
 
 -- terse time format good for file names

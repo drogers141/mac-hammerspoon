@@ -3,6 +3,29 @@
 
 util = {}
 
+---------------------------------------------------------------
+-- CONFIG
+---------------------------------------------------------------
+
+-- read local configuration stored in json
+-- module - code module
+-- returns value associated with that key
+-- so far only necessary to store strings
+util.get_config = function(module, key)
+    local conf_file = hs.fs.currentDir() .. "/config.json"
+    --print("conf_file: "..conf_file)
+    local f = assert(io.open(conf_file, 'r'))
+    local json_str = f:read("*a")
+    f:close()
+    local config_val = nil
+    if json_str then
+        local config = hs.json.decode(json_str)
+        --print(module..": "..key.." = "..config[module][key])
+        config_val = config[module][key]
+    end
+    return config_val
+end
+
 -------------------------------------------------------------------------------
 -- TABLE UTILS
 -- In general assume table is a dictionary data structure for these
@@ -101,7 +124,7 @@ end
 -- new unified logging system breaks syslog
 -- rather than play with the new system for my stuff will replicate
 -- system logging in ~/log
-util.logfile = "/Users/drogers/log/hammerspoon.log"
+util.logfile = util.get_config('util', 'logfile')
 
 -- log a string to util.logfile
 -- params

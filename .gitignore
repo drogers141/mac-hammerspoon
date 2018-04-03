@@ -3,3 +3,6 @@ ext/
 snapshots/
 hs/
 
+# local config
+config.json
+
