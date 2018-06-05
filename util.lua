@@ -235,7 +235,9 @@ util.screens = {
   -- Dell 26 inch
   s2= {h = 1200, w = 1920, x = 0, y = 0},
   -- work - Nixeus 27 inch
-  s3 = {h = 1440, w = 2560, x = 0, y = 0}
+  s3 = {h = 1440, w = 2560, x = 0, y = 0},
+  -- Dell 34 inch ultra wide
+  s4 = {h = 1440, w = 3440, x = 0, y = 0}
 }
 
 -- rect - hs.geometry.rect
