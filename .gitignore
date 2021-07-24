@@ -2,6 +2,8 @@
 ext/
 snapshots/
 hs/
+.idea/
+*.iml
 
 # local config
 config.json
