@@ -230,14 +230,16 @@ end
 -- arbitrarily deciding on id here
 -- so need to add any new screens
 util.screens = {
-  -- laptop
+  -- 2013 macbook pro
   s1 = {h = 900, w = 1440, x = 0, y = 0},
   -- Dell 26 inch
   s2= {h = 1200, w = 1920, x = 0, y = 0},
   -- work - Nixeus 27 inch
   s3 = {h = 1440, w = 2560, x = 0, y = 0},
   -- Dell 34 inch ultra wide
-  s4 = {h = 1440, w = 3440, x = 0, y = 0}
+  s4 = {h = 1440, w = 3440, x = 0, y = 0},
+  -- 2021 macbook pro 1728.0,1117.0)
+  s5 = {h = 1117, w = 1728, x = 0, y = 0}
 }
 
 -- rect - hs.geometry.rect

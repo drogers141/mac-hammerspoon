@@ -6,8 +6,8 @@ local util = dofile(package.searchpath("util", package.path))
 --local spaces = dofile(package.searchpath("spaces", package.path))
 
 
--- **** SPACES FUNCTIONALITY - INTERNAL/EPHEMERAL ***
-local spaces = require("hs._asm.undocumented.spaces")
+-- Spaces functionality
+local spaces = require("hs.spaces")
 
 visicon = {}
 
@@ -49,7 +49,7 @@ function visicon.state()
   if wins then
     state['windows'] = wins
     state['screen'] = util.screentable(ow[1]:screen())
-    state['desktop'] = math.floor(spaces.currentSpace())
+    state['desktop'] = math.floor(spaces.activeSpaceOnScreen())
     -- seconds since epoch
     local now = os.time()
     state['timestamp'] = now
@@ -146,7 +146,7 @@ end
 -- if we need to change up
 function visicon.get_current_vc_queue_name()
   local screen_id = util.get_screen_id(hs.screen.mainScreen():fullFrame())
-  local desktop_id = math.floor(spaces.currentSpace())
+  local desktop_id = math.floor(spaces.activeSpaceOnScreen())
   if screen_id and desktop_id then
     return screen_id .. 'd' .. desktop_id
   end

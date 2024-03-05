@@ -7,7 +7,7 @@ end)
 
 -- notifications
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "H", function()
-  hs.notify.new({title="Hammerspoon", informativeText="Hello World!"}):send():release()
+  hs.notify.new({title="Hammerspoon", informativeText="Hello World!"}):send()
 end)
 
 
@@ -24,8 +24,8 @@ winops = dofile(package.searchpath("winops", package.path))
 winutil = dofile(package.searchpath("winutil", package.path))
 visicon = dofile(package.searchpath("visicon", package.path))
 
--- **** SPACES FUNCTIONALITY - LOCKS US TO OS X 10.9 AFAIK ***
-spaces = require("hs._asm.undocumented.spaces")
+-- Spaces functionality
+spaces = require("hs.spaces")
 
 ---------------
 -- RUN TESTS
@@ -278,13 +278,13 @@ function store_to_json()
     visicon.global_snapshot()
     hs.notify.new({title="Hammerspoon",
         informativeText="Stored visicon queues to json"}
-        ):send():release()
+        ):send()
 end
 function restore_from_json()
     visicon.restore_queues_from_snapshot()
     hs.notify.new({title="Hammerspoon",
         informativeText="Restored visicon queues from json"}
-        ):send():release()
+        ):send()
 end
 
 
