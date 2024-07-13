@@ -76,6 +76,32 @@ function movewindow_lefthalf()
   win:setFrame(newframe)
 end
 
+-- move the window to the right third of the screen
+function movewindow_right_third()
+  local win = hs.window.focusedWindow()
+  local newframe = win:screen():frame()
+  newframe.w = newframe.w / 3
+  newframe.x = newframe.x + 2 * newframe.w
+  win:setFrame(newframe)
+end
+
+-- move the window to the middle third of the screen
+function movewindow_middle_third()
+  local win = hs.window.focusedWindow()
+  local newframe = win:screen():frame()
+  newframe.w = newframe.w / 3
+  newframe.x = newframe.x + newframe.w
+  win:setFrame(newframe)
+end
+
+-- move the window to the left third of the screen
+function movewindow_left_third()
+  local win = hs.window.focusedWindow()
+  local newframe = win:screen():frame()
+  newframe.w = newframe.w / 3
+  win:setFrame(newframe)
+end
+
 -- make window take up all of visible screen - not fullscreen mode
 function make_window_fullsize()
   local win = hs.window.focusedWindow()
@@ -296,6 +322,10 @@ bindings = {
 {mods={"cmd", "ctrl", "alt"}, key="L", func=movewindow_lefthalf, text="Move window to left half"},
 {mods={"cmd", "ctrl", "alt"}, key="F", func=make_window_fullsize, text="Make window full size"},
 {mods={"cmd", "ctrl", "alt"}, key="K", func=alert_bindings, text="Show key bindings"},
+{mods={"cmd", "ctrl", "alt"}, key="1", func=movewindow_left_third, text="Move window to left third"},
+{mods={"cmd", "ctrl", "alt"}, key="2", func=movewindow_middle_third, text="Move window to middle third"},
+{mods={"cmd", "ctrl", "alt"}, key="3", func=movewindow_right_third, text="Move window to right third"},
+
 --{mods={"cmd", "ctrl", "alt"}, key="W", func=order_wins_info_alert, text="Show window info for context"},
 --{mods={"cmd", "ctrl", "alt"}, key="I", func=visicon.ignore_current_vc, text="Ignore current vc - stop saving state changes automatically."},
 --{mods={"cmd", "ctrl", "alt"}, key="U", func=visicon.unignore_current_vc, text="Unignore current vc - resume normal automatic saving of state changes"},
