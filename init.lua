@@ -60,12 +60,22 @@ end
 -- Window Operations
 -----------------------
 
+-- mpv windows still go behind the dock, even though win:screen() doesn't include it
+-- this works
+function fix_height_if_mpv(frame)
+  if appname == "mpv" then
+    frame.h = frame.h - 1
+  end
+end
+
 -- move the window to the right half of the screen
 function movewindow_righthalf()
   local win = hs.window.focusedWindow()
   local newframe = win:screen():frame()
   newframe.w = newframe.w / 2
   newframe.x = newframe.x + newframe.w
+  appname = win:application():name()
+  fix_height_if_mpv(newframe)
   win:setFrame(newframe)
 end
 
@@ -73,6 +83,7 @@ function movewindow_lefthalf()
   local win = hs.window.focusedWindow()
   local newframe = win:screen():frame()
   newframe.w = newframe.w / 2
+  fix_height_if_mpv(newframe)
   win:setFrame(newframe)
 end
 
@@ -82,6 +93,7 @@ function movewindow_right_third()
   local newframe = win:screen():frame()
   newframe.w = newframe.w / 3
   newframe.x = newframe.x + 2 * newframe.w
+  fix_height_if_mpv(newframe)
   win:setFrame(newframe)
 end
 
@@ -91,6 +103,7 @@ function movewindow_middle_third()
   local newframe = win:screen():frame()
   newframe.w = newframe.w / 3
   newframe.x = newframe.x + newframe.w
+  fix_height_if_mpv(newframe)
   win:setFrame(newframe)
 end
 
@@ -99,6 +112,7 @@ function movewindow_left_third()
   local win = hs.window.focusedWindow()
   local newframe = win:screen():frame()
   newframe.w = newframe.w / 3
+  fix_height_if_mpv(newframe)
   win:setFrame(newframe)
 end
 
@@ -106,6 +120,7 @@ end
 function make_window_fullsize()
   local win = hs.window.focusedWindow()
   local newframe = win:screen():frame()
+  fix_height_if_mpv(newframe)
   win:setFrame(newframe)
 end
 --function win_by_app_name(name)
@@ -470,10 +485,10 @@ switcher_space = hs.window.switcher.new(hs.window.filter.new():setCurrentSpace(t
 --switcher_browsers = hs.window.switcher.new{'Safari','Google Chrome'} -- specialized switcher for your dozens of browser windows :)
 
 -- bind to hotkeys; WARNING: at least one modifier key is required!
-hs.hotkey.bind('cmd-alt','tab','Next window',function()switcher_space:next()end)
-hs.hotkey.bind('cmd-alt-shift','tab','Prev window',function()switcher_space:previous()end)
-hs.hotkey.bind('cmd-alt','right','Next window',function()switcher_space:next()end)
-hs.hotkey.bind('cmd-alt','left','Prev window',function()switcher_space:previous()end)
+--hs.hotkey.bind('alt','tab','Next window',function()switcher_space:next()end)
+--hs.hotkey.bind('cmd-shift','tab','Prev window',function()switcher_space:previous()end)
+hs.hotkey.bind('alt','right','Next window',function()switcher_space:next()end)
+hs.hotkey.bind('alt','left','Prev window',function()switcher_space:previous()end)
 
 
 -- alternatively, call .nextWindow() or .previousWindow() directly (same as hs.window.switcher.new():next())
